@@ -1,5 +1,6 @@
 import 'package:amalia_musica/constants/colors.dart';
 import 'package:amalia_musica/constants/font_family.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -28,8 +29,11 @@ class Tarjeta extends StatelessWidget {
           padding: const EdgeInsets.all(7.0),
           child: Align(
             alignment: getAlign(alineacion),
-            child: Text(
+            child: AutoSizeText(
               titulo,
+              maxLines: 2,
+                      minFontSize: ScreenUtil().setSp(12),
+                      stepGranularity: ScreenUtil().setSp(1),
               style: TextStyle(
                 fontFamily: FontFamily.bodoniFLF,
                 fontWeight: FontWeight.bold,
