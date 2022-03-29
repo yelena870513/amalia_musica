@@ -571,6 +571,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.4.0"
+  photo_view:
+    dependency: "direct main"
+    description:
+      name: photo_view
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.13.0"
   platform:
     dependency: transitive
     description:
@@ -627,6 +634,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.1+1"
+  responsive_framework:
+    dependency: "direct main"
+    description:
+      name: responsive_framework
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.7"
   rxdart:
     dependency: transitive
     description:

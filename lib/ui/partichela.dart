@@ -1,15 +1,14 @@
 import 'package:amalia_musica/constants/colors.dart';
 import 'package:amalia_musica/constants/font_family.dart';
-import 'package:amalia_musica/constants/strings.dart';
 import 'package:amalia_musica/model/contenido.dart';
 import 'package:amalia_musica/stores/data/contenido_store.dart';
 import 'package:amalia_musica/ui/visor_tema.dart';
+import 'package:amalia_musica/widgets/line_horizontal_gruesa.dart';
 import 'package:amalia_musica/widgets/partichuela_widget.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class PartichelaScreen extends StatefulWidget {
   const PartichelaScreen(
@@ -47,18 +46,14 @@ class _PartichelaScreenState extends State<PartichelaScreen> {
       ),
       body: Container(
         padding: const EdgeInsets.all(20),
-        width: size.width,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/home3.jpg'),
-                fit: BoxFit.cover)),
+        width: ScreenUtil().setWidth(size.width),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: size.width * 0.9,
-              height: 80,
+              width: ScreenUtil().setWidth(size.width * 0.9),
+              height: ScreenUtil().setWidth(80),
               padding: const EdgeInsets.only(
                   top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
               decoration: BoxDecoration(
@@ -76,19 +71,39 @@ class _PartichelaScreenState extends State<PartichelaScreen> {
                       style: TextStyle(
                         fontFamily: FontFamily.bodoniFLF,
                         fontWeight: FontWeight.bold,
-                        fontSize: ScreenUtil().setSp(40),
+                        fontSize: ResponsiveValue(
+                              context,
+                              defaultValue: ScreenUtil().setSp(30),
+                              valueWhen: const [
+                                Condition.equals(
+                                  name: TABLET,
+                                  value: 45.0,
+                                )
+                              ],
+                            ).value ??
+                            0.0,
                         letterSpacing: 0.2,
                         color: AppColors.grisBase,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 1.0,
                     ),
                     Text(
                       _contenidoStore.selectedTema.titulo.toUpperCase(),
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
-                        fontSize: ScreenUtil().setSp(20),
+                        fontSize: ResponsiveValue(
+                              context,
+                              defaultValue: ScreenUtil().setSp(18),
+                              valueWhen: const [
+                                Condition.equals(
+                                  name: TABLET,
+                                  value: 28.0,
+                                )
+                              ],
+                            ).value ??
+                            0.0,
                         letterSpacing: 0.2,
                         color: AppColors.grisBase,
                       ),
@@ -98,12 +113,18 @@ class _PartichelaScreenState extends State<PartichelaScreen> {
               ),
             ),
             const SizedBox(
+              height: 10,
+            ),
+            CustomPaint(
+                painter: LineaHorizontalGruesa(
+                    3, const Offset(-20.0, 0.0), const Offset(20.0, 0.0))),
+            const SizedBox(
               height: 60,
             ),
             Container(
-              height: 90,
-              width: size.width * 0.90,
-              padding: EdgeInsets.only(top: 25.0),
+              height: ScreenUtil().setHeight(90),
+              width: ScreenUtil().setWidth(size.width * 0.90),
+              padding: const EdgeInsets.only(top: 25.0),
               color: AppColors.rosaBase,
               child: Column(
                 children: [
@@ -122,7 +143,17 @@ class _PartichelaScreenState extends State<PartichelaScreen> {
                       'Partitura',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: ScreenUtil().setSp(28),
+                        fontSize: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(25),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 30.0,
+                    )
+                  ],
+                ).value ?? 0.0,
                         letterSpacing: 0.2,
                         color: AppColors.grisBase,
                       ),
@@ -135,15 +166,31 @@ class _PartichelaScreenState extends State<PartichelaScreen> {
               height: 20,
             ),
             Container(
-              padding: EdgeInsets.only(left: 60.0),
-              width: size.width * 0.90,
+              padding: const EdgeInsets.only(left: 23.0),
+              width: ScreenUtil().setWidth(size.width * 0.90),
               color: AppColors.rosaBase,
               child: SizedBox(
-                  width: 0.6 * size.width,
+                  width: ScreenUtil().setWidth(0.5 * size.width),
                   child: Partichela(
                     contenidos: contenidosSeleccionados,
                   )),
             ),
+            SizedBox(
+            height: ResponsiveValue(
+                  context,
+                  defaultValue: 100.0,
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 380.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+          ),
+          CustomPaint(
+              painter: LineaHorizontalGruesa(
+                  1.45, const Offset((-800), 0.0), const Offset(800, 0.0))),
           ],
         ),
       ),

@@ -1,6 +1,4 @@
 import 'package:amalia_musica/constants/colors.dart';
-import 'package:amalia_musica/constants/font_family.dart';
-import 'package:amalia_musica/constants/strings.dart';
 import 'package:amalia_musica/model/contenido.dart';
 import 'package:amalia_musica/model/tema.dart';
 import 'package:amalia_musica/stores/data/contenido_store.dart';
@@ -8,10 +6,10 @@ import 'package:amalia_musica/ui/intro.dart';
 import 'package:amalia_musica/ui/partes.dart';
 import 'package:amalia_musica/ui/partichela.dart';
 import 'package:amalia_musica/widgets/bounce_tab_bar.dart';
-import 'package:amalia_musica/widgets/tarjeta.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'creditos.dart';
 import 'favoritos.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen>
   late AnimationController _animationController;
   late Animation<double> _homeAnimation;
   late final VoidCallback onBackButtonTap;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   //stores:---------------------------------------------------------------------
   int _currentIndex = 0;
@@ -51,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   void resetCurrentIndex() {
     setState(() {
-     _isPartesActive = true;
+      _isPartesActive = true;
     });
   }
 
@@ -108,119 +107,12 @@ class _HomeScreenState extends State<HomeScreen>
                 body: IndexedStack(
                   index: _currentIndex,
                   children: <Widget>[
-                    const IntroScreen(),
+                    IntroScreen(key: _scaffoldKey,),
                     const FavoritoScreen(),
                     Container(
                       child: getCurrentScreen(size),
                     ),
-                    Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Center(
-                            child: Container(
-                              width: size.width * 0.9,
-                              padding: const EdgeInsets.all(15.0),
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: AppColors.rosaBase,
-                                      width: 2.0,
-                                      style: BorderStyle.solid)),
-                              child: Text(
-                                Strings.creditos,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: FontFamily.bodoniFLF,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: ScreenUtil().setSp(36),
-                                  letterSpacing: 0.2,
-                                  color: AppColors.grisBase,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15.0,
-                          ),
-                          Center(
-                            child: Column(
-                              children: [
-                                Tarjeta(
-                                  titulo: 'Dirección de proyecto',
-                                  description: 'Yanet Cabargas Fernnández',
-                                  tituloTamanno: 20,
-                                  descriptionTamano: 14,
-                                  alineacion: '',
-                                ),
-                                const SizedBox(
-                                  height: 4.0,
-                                ),
-                                Tarjeta(
-                                  titulo: 'Proveedor de contenidos',
-                                  description: 'Amalia Simoni',
-                                  tituloTamanno: 20,
-                                  descriptionTamano: 14,
-                                  alineacion: '',
-                                ),
-                                const SizedBox(
-                                  height: 4.0,
-                                ),
-                                Tarjeta(
-                                  titulo: 'Diseño',
-                                  description: 'Jeniffer Lucia Muñiz Márquez',
-                                  tituloTamanno: 20,
-                                  descriptionTamano: 14,
-                                  alineacion: '',
-                                ),
-                                const SizedBox(
-                                  height: 4.0,
-                                ),
-                                Tarjeta(
-                                  titulo: 'Programación',
-                                  description: 'Yelena Islen San Juan',
-                                  tituloTamanno: 20,
-                                  descriptionTamano: 14,
-                                  alineacion: '',
-                                ),
-                                const SizedBox(
-                                  height: 4.0,
-                                ),
-                                Tarjeta(
-                                  titulo: 'Control de calidad',
-                                  description: 'Mailen Maribal',
-                                  tituloTamanno: 20,
-                                  descriptionTamano: 14,
-                                  alineacion: '',
-                                ),
-                                const SizedBox(
-                                  height: 4.0,
-                                ),
-                                Tarjeta(
-                                  titulo: 'Gestión de la calidad y auditoría',
-                                  description: 'Mercedes María Sosa Hernández',
-                                  tituloTamanno: 20,
-                                  descriptionTamano: 14,
-                                  alineacion: '',
-                                ),
-                                const SizedBox(
-                                  height: 3.0,
-                                ),
-                                Text(
-                                  'Ivett Muñoz Ramírez'.toUpperCase(),
-                                  style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(14),
-                                    letterSpacing: 0.2,
-                                    color: AppColors.grisBase,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                    CreditosScreen(key: UniqueKey(),) ],
                 ),
                 bottomNavigationBar: BounceTabBar(
                   key: UniqueKey(),
@@ -232,30 +124,27 @@ class _HomeScreenState extends State<HomeScreen>
                     });
                   },
                   backgroundColor: AppColors.rosaBase,
-                  items: const <Widget>[
-                    InkWell(
-                      child: Icon(
-                        Icons.comment,
-                        color: Colors.white,
-                      ),
+                  items: <Widget>[
+                    InkWell(                      
+                      child: _currentIndex == 0
+                          ? Image.asset('assets/iconos/intro_OFF.png', width: 40, height: 40)
+                          : Image.asset('assets/iconos/intro_ON.png', width: 40, height: 40),
+                          
                     ),
                     InkWell(
-                      child: Icon(
-                        Icons.favorite_border,
-                        color: Colors.white,
-                      ),
+                      child: _currentIndex == 1
+                          ? Image.asset('assets/iconos/favorito_ON.png', width: 40, height: 40)
+                          : Image.asset('assets/iconos/favorito_OFF.png', width: 40, height: 40),
+                      ),                    
+                    InkWell(
+                      child:  _currentIndex == 2
+                          ? Image.asset('assets/iconos/menu_ON.png', width: 40, height: 40)
+                          : Image.asset('assets/iconos/menu_OFF.png', width: 40, height: 40),
                     ),
                     InkWell(
-                      child: Icon(
-                        Icons.home_filled,
-                        color: Colors.white,
-                      ),
-                    ),
-                    InkWell(
-                      child: Icon(
-                        Icons.people_sharp,
-                        color: Colors.white,
-                      ),
+                      child:  _currentIndex == 3
+                          ? Image.asset('assets/iconos/creditos_ON.png', width: 40, height: 40)
+                          : Image.asset('assets/iconos/creditos_OFF.png', width: 40, height: 40),
                     ),
                   ],
                 ),

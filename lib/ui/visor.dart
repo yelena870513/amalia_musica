@@ -8,8 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 import 'package:provider/provider.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class VisorScreen extends StatefulWidget {
   const VisorScreen({Key? key}) : super(key: key);
@@ -33,7 +34,6 @@ class _VisorScreenState extends State<VisorScreen>
     try {
       String audio = _contenidoStore.selectedTema.audio;
       await _player.setAsset("assets/audio/" + audio);
-   
     } catch (e) {
       print("Error loading audio source: $e");
     }
@@ -42,10 +42,10 @@ class _VisorScreenState extends State<VisorScreen>
   _actualizarFavoritos(int contenido) {
     var favoritoBD = Provider.of<FavoritoModel>(context, listen: false);
     List favoritos = favoritoBD.favoritoList;
-    if(favoritos.contains(contenido)){
+    if (favoritos.contains(contenido)) {
       int position = favoritos.indexOf(contenido);
       favoritoBD.deleteItem(position);
-    }else{
+    } else {
       favoritoBD.addItem(contenido);
     }
   }
@@ -154,31 +154,37 @@ class _VisorScreenState extends State<VisorScreen>
                       child: Stack(
                         children: <Widget>[
                           Positioned(
+                            top: kToolbarHeight - 150,
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height,
                               child: FadeTransition(
                                   opacity: _homeAnimation,
-                                  child: CarouselSlider.builder(
-                                    itemCount: images.length,
-                                    itemBuilder: (BuildContext context,
-                                            int itemIndex, int pageViewIndex) =>
-                                        Image.asset(
-                                      'assets/images/' + images[itemIndex],
-                                      fit: BoxFit.cover,
-                                      height: 0.8 * height,
+                                  child: PhotoViewGallery.builder(
+                                    backgroundDecoration: const BoxDecoration(
+                                      color: Colors.white
                                     ),
-                                    options: CarouselOptions(
-                                      height: 0.8 * height,
-                                      aspectRatio: 16 / 9,
-                                      viewportFraction: 0.8,
-                                      initialPage: 0,
-                                      enableInfiniteScroll: false,
-                                      reverse: false,
-                                      autoPlay: false,
-                                      autoPlayCurve: Curves.fastOutSlowIn,
-                                      enlargeCenterPage: true,
-                                      scrollDirection: Axis.horizontal,
+                                    scrollPhysics:
+                                        const BouncingScrollPhysics(),
+                                    itemCount: images.length,
+                                    builder:
+                                        (BuildContext context, int itemIndex) {
+                                      return PhotoViewGalleryPageOptions(
+                                        imageProvider: AssetImage(
+                                            'assets/images/' +
+                                                images[itemIndex]),
+                                        initialScale:
+                                            PhotoViewComputedScale.contained,
+                                        heroAttributes: PhotoViewHeroAttributes(
+                                            tag: images[itemIndex]),
+                                      );
+                                    },
+                                    loadingBuilder: (context, event) => const Center(
+                                      child: SizedBox(
+                                        width: 20.0,
+                                        height: 20.0,
+                                        child: CircularProgressIndicator(),
+                                      ),
                                     ),
                                   )),
                             ),

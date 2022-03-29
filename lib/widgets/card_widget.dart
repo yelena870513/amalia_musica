@@ -1,9 +1,15 @@
 import 'package:amalia_musica/constants/colors.dart';
 import 'package:amalia_musica/widgets/tarjeta.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class CardWidget extends StatelessWidget {
-  const CardWidget({Key? key, required this.numero, required this.description, required this.onTap})
+  const CardWidget(
+      {Key? key,
+      required this.numero,
+      required this.description,
+      required this.onTap})
       : super(key: key);
   final String numero;
   final String description;
@@ -16,8 +22,8 @@ class CardWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         color: AppColors.rosaBase,
-        width: size.width * 0.45,
-        height: size.height * 0.27,
+        width: ScreenUtil().setWidth(size.width * 0.45),
+        height: ScreenUtil().setHeight(size.height * 0.28),
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
@@ -35,8 +41,28 @@ class CardWidget extends StatelessWidget {
               child: Tarjeta(
                 titulo: numero,
                 description: description,
-                tituloTamanno: 70,
-                descriptionTamano: 18,
+                tituloTamanno: ResponsiveValue(
+                  context,
+                  defaultValue: 60.0,
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 100.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+                descriptionTamano: ResponsiveValue(
+                  context,
+                  defaultValue: 14.0,
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 20.0,
+                    )
+                  ],
+                ).value ?? 0.0,
                 alineacion: 'right',
               ),
             ),

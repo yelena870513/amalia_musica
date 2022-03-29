@@ -7,6 +7,7 @@ import 'package:amalia_musica/ui/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'data/datasources/content_datasource.dart';
 import 'stores/font/font_store.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -36,6 +37,15 @@ class MyApp extends StatelessWidget {
       child: Observer(builder: (context) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
+          builder: (context, widget) => ResponsiveWrapper.builder(
+            ClampingScrollWrapper.builder(context, widget!),
+            breakpoints: const [
+              ResponsiveBreakpoint.resize(350, name: MOBILE),
+              ResponsiveBreakpoint.autoScale(600, name: TABLET),
+              ResponsiveBreakpoint.resize(800, name: DESKTOP),
+              ResponsiveBreakpoint.autoScale(1700, name: 'XL'),
+            ],
+          ),
           title: Strings.appName,
           theme: ThemeData(
               // This is the theme of your application.

@@ -23,18 +23,18 @@ class TarjetaFavorito extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       children: [
         Container(
-          width: 300,
-          height: 70,
-          padding: const EdgeInsets.all(7.0),
+          width: ScreenUtil().setWidth(100),
+                 
           child: Align(
             alignment: getAlign(alineacion),
             child: AutoSizeText(
               titulo,
-              maxLines: 3,
-              minFontSize: ScreenUtil().setSp(14),
+              maxLines: 4,
+              minFontSize: ScreenUtil().setSp(12),
               stepGranularity: ScreenUtil().setSp(1),
               style: TextStyle(
                 fontFamily: FontFamily.bodoniFLF,
@@ -48,9 +48,8 @@ class TarjetaFavorito extends StatelessWidget {
         ),
         CustomPaint(painter: LineaHorizontal()),
         Container(
-          width: 300,
-          height: 70,
-          padding: const EdgeInsets.all(7.0),
+          width: ScreenUtil().setWidth(100),
+             
           child: AutoSizeText(description.toUpperCase(),
               maxLines: 3,
               minFontSize: ScreenUtil().setSp(12),

@@ -6,6 +6,8 @@ class Strings {
   static const String creditos = "Créditos";
   static const String favoritos = "Favoritos";
   static const String intro = "Introducción";
+  static const String titulo = "“Amalia Simoni”";
+  static const String suite = "Suite sinfónica";
   static const String resultFavorito = "No hay favoritos.";
   static const String texto = '''Esta partitura, que lleva por título Suite sinfónica “Amalia Simoni”, está inspirada en la vida de la gran Amalia Simoni, esposa de Ignacio Agramonte; maravillosa mujer que, además de ser una patriota comprometida y esposa leal a la causa revolucionaria y a su amor por El Mayor, fue una reconocida cantante de ópera de su
 tiempo.

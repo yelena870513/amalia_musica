@@ -5,10 +5,9 @@ import 'package:amalia_musica/model/contenido.dart';
 import 'package:amalia_musica/model/favorito_model.dart';
 import 'package:amalia_musica/stores/data/contenido_store.dart';
 import 'package:amalia_musica/widgets/card_widget_favoritos.dart';
-import 'package:flutter/foundation.dart';
+import 'package:amalia_musica/widgets/line_horizontal_gruesa.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:amalia_musica/ui/visor.dart';
 
@@ -60,19 +59,14 @@ class _FavoritoScreenState extends State<FavoritoScreen> {
     }).toList();
 
       return Scaffold(
-        body: Container(
-          padding: const EdgeInsets.all(20),
-          width: size.width,
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/home2.jpg'),
-                  fit: BoxFit.cover)),
+        body: Container(         
+          width: ScreenUtil().setWidth(size.width),          
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: size.width * 0.9,
+                width: ScreenUtil().setWidth(size.width * 0.9), 
                 padding: const EdgeInsets.only(
                     top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
                 decoration: BoxDecoration(
@@ -94,11 +88,16 @@ class _FavoritoScreenState extends State<FavoritoScreen> {
                 ),
               ),
               const SizedBox(
+                height: 10,
+              ),
+                CustomPaint(painter: LineaHorizontalGruesa(3, const Offset(-20.0, 0.0), const Offset(20.0, 0.0))),            
+
+              const SizedBox(
                 height: 60,
               ),
               Container(
-                width: size.width,
-                height: size.height * 0.6,
+                width: ScreenUtil().setWidth(size.width * 0.9),
+                height: ScreenUtil().setHeight(size.height * 0.6),
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: SingleChildScrollView(
                   physics: const PageScrollPhysics(),
@@ -130,14 +129,19 @@ class _FavoritoScreenState extends State<FavoritoScreen> {
                     style: TextStyle(
                       fontFamily: FontFamily.helvetica,
                       color: AppColors.grisBase,
-                      fontSize: ScreenUtil().setSp(20),
+                      fontSize: ScreenUtil().setSp(18),
                       fontWeight: FontWeight.w600,
 
 
                     ),
                   ),
                 ),
-              )
+                
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              CustomPaint(painter: LineaHorizontalGruesa(1.45, const Offset((-800), 0.0), const Offset(800, 0.0))),
             ],
           ),
         ),

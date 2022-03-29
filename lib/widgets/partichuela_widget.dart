@@ -7,6 +7,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class Partichela extends StatefulWidget {
   final List<Contenido> contenidos;
@@ -32,7 +33,7 @@ class _PartichelaState extends State<Partichela> {
     
     buildItem(String label, int id) {
       return Container(
-        width: 250,
+        width: ScreenUtil().setWidth(250),
         decoration: BoxDecoration(
           border: const Border(
             bottom: BorderSide(
@@ -60,7 +61,17 @@ class _PartichelaState extends State<Partichela> {
               label,
               style: TextStyle(
                 fontWeight: FontWeight.normal,
-                fontSize: ScreenUtil().setSp(22),
+                fontSize: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(18),
+                  valueWhen:  [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: ScreenUtil().setSp(25),
+                    )
+                  ],
+                ).value ?? 0.0,
                 letterSpacing: 0.2,
                 color: Colors.grey,
               ),
@@ -76,7 +87,7 @@ class _PartichelaState extends State<Partichela> {
           color: AppColors.grisBase,
           child: SingleChildScrollView(
               child: Container(
-            height: 220,
+            height: ScreenUtil().setHeight(150),
             child: ListView.builder(
                 physics: const PageScrollPhysics(),
                 itemCount: widget.contenidos.length,
@@ -129,7 +140,17 @@ class _PartichelaState extends State<Partichela> {
                             'Partichela',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: ScreenUtil().setSp(28),
+                              fontSize: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(25),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 30.0,
+                    )
+                  ],
+                ).value ?? 0.0,
                               letterSpacing: 0.2,
                               color: AppColors.grisBase,
                             ),

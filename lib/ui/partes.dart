@@ -1,11 +1,15 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:amalia_musica/constants/font_family.dart';
+import 'package:amalia_musica/constants/strings.dart';
 import 'package:amalia_musica/model/tema.dart';
 import 'package:amalia_musica/stores/data/contenido_store.dart';
 import 'package:amalia_musica/widgets/card_widget.dart';
+import 'package:amalia_musica/widgets/line_horizontal_gruesa.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class PartesScreen extends StatefulWidget {
   const PartesScreen({Key? key, required this.onTap}) : super(key: key);
@@ -60,41 +64,128 @@ class _PartesScreenState extends State<PartesScreen> {
         minTextAdapt: true,
         orientation: Orientation.portrait);
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/partes.jpg'),
-                fit: BoxFit.contain)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 80.0),
-            for (var i = 0; i < temas.length - 1; i += 2)
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CardWidget(
-                    numero: temas[i].id.toString() + '.',
-                    description: temas[i].titulo,
-                    onTap: () {
-                      _contenidoStore.setSelectedTema(temas[i]);
-                      widget.onTap();
-                    },
-                  ),
-                  CardWidget(
-                    numero: temas[i + 1].id.toString() + '.',
-                    description: temas[i + 1].titulo,
-                    onTap: () {
-                      _contenidoStore.setSelectedTema(temas[i + 1]);
-                      widget.onTap();
-                    },
-                  )
-                ],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Column(
+            children: [
+              Text(
+                Strings.titulo,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: FontFamily.bodoniFLF,
+                  fontWeight: FontWeight.bold,
+                  fontSize: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(35),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 45.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+                  color: Colors.black,
+                ),
               ),
-          ],
-        ),
+              Text(
+                Strings.suite,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: FontFamily.bodoniFLF,
+                  fontWeight: FontWeight.bold,
+                  fontSize: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(25),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 35.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+           SizedBox(
+            height: ResponsiveValue(
+                  context,
+                  defaultValue: 20.0,
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 40.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+          ),
+          CustomPaint(
+              painter: LineaHorizontalGruesa(
+                  3, const Offset(-20.0, 0.0), const Offset(20.0, 0.0))),
+          SizedBox(height: 10.0),
+          for (var i = 0; i < temas.length - 1; i += 2)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CardWidget(
+                  numero: temas[i].id.toString() + '.',
+                  description: temas[i].titulo,
+                  onTap: () {
+                    _contenidoStore.setSelectedTema(temas[i]);
+                    widget.onTap();
+                  },
+                ),
+                CardWidget(
+                  numero: temas[i + 1].id.toString() + '.',
+                  description: temas[i + 1].titulo,
+                  onTap: () {
+                    _contenidoStore.setSelectedTema(temas[i + 1]);
+                    widget.onTap();
+                  },
+                ),
+                ],
+            ),
+              SizedBox(
+                  height: ResponsiveValue(
+                  context,
+                  defaultValue: 5.0,
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 10.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+                ),
+                CustomPaint(
+                    painter: LineaHorizontalGruesa(3,
+                        const Offset(20.0, 0.0), const Offset(-20.0, 0.0))),
+             
+           SizedBox(
+            height: ResponsiveValue(
+                  context,
+                  defaultValue: 20.0,
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 40.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+          ),
+          CustomPaint(
+              painter: LineaHorizontalGruesa(
+                  1.45, const Offset((-800), 0.0), const Offset(800, 0.0))),
+        ],
       ),
     );
   }

@@ -3,14 +3,16 @@ import 'package:amalia_musica/constants/font_family.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import 'line_horizontal.dart';
+import 'line_horizontal_gruesa.dart';
 
 class Tarjeta extends StatelessWidget {
   final String titulo;
   final String description;
-  final int tituloTamanno;
-  final int descriptionTamano;
+  final double tituloTamanno;
+  final double descriptionTamano;
   String alineacion;
   Tarjeta({
     Key? key,
@@ -45,8 +47,29 @@ class Tarjeta extends StatelessWidget {
           ),
         ),
         CustomPaint(
-          painter: LineaHorizontal()
-          ),
+                    painter: LineaHorizontalGruesa(1,
+                         Offset(ResponsiveValue(
+                  context,
+                  defaultValue: 50.0,
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 100.0,
+                    )
+                  ],
+                ).value ?? 0.0, 0.0), Offset(ResponsiveValue(
+                  context,
+                  defaultValue: -50.0,
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: -100.0,
+                    )
+                  ],
+                ).value ?? 0.0, 0.0))),
+             
         Padding(
           padding: const EdgeInsets.all(7.0),
           child: Text(description.toUpperCase(),
