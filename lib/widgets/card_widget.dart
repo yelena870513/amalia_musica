@@ -43,7 +43,7 @@ class CardWidget extends StatelessWidget {
                 description: description,
                 tituloTamanno: ResponsiveValue(
                   context,
-                  defaultValue: 60.0,
+                  defaultValue: 50.0,
                   valueWhen: const [
                     
                     Condition.equals(
@@ -54,7 +54,7 @@ class CardWidget extends StatelessWidget {
                 ).value ?? 0.0,
                 descriptionTamano: ResponsiveValue(
                   context,
-                  defaultValue: 14.0,
+                  defaultValue: 13.0,
                   valueWhen: const [
                     
                     Condition.equals(

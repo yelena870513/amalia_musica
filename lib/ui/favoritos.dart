@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:amalia_musica/ui/visor.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class FavoritoScreen extends StatefulWidget {
   const FavoritoScreen({Key? key}) : super(key: key);
@@ -129,7 +130,17 @@ class _FavoritoScreenState extends State<FavoritoScreen> {
                     style: TextStyle(
                       fontFamily: FontFamily.helvetica,
                       color: AppColors.grisBase,
-                      fontSize: ScreenUtil().setSp(18),
+                      fontSize: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(18),
+                  valueWhen:  [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: ScreenUtil().setSp(24),
+                    )
+                  ],
+                ).value ?? 0.0,
                       fontWeight: FontWeight.w600,
 
 
@@ -138,11 +149,7 @@ class _FavoritoScreenState extends State<FavoritoScreen> {
                 ),
                 
               ),
-              const SizedBox(
-                height: 25,
-              ),
-              CustomPaint(painter: LineaHorizontalGruesa(1.45, const Offset((-800), 0.0), const Offset(800, 0.0))),
-            ],
+               ],
           ),
         ),
       );

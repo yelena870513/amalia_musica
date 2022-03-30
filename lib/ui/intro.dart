@@ -4,6 +4,7 @@ import 'package:amalia_musica/constants/strings.dart';
 import 'package:amalia_musica/widgets/line_horizontal_gruesa.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({Key? key}) : super(key: key);
@@ -52,28 +53,90 @@ class IntroScreen extends StatelessWidget {
               height: 30,
             ),
             SizedBox(
-              height: ScreenUtil().setHeight(size.height * 0.6),
+              height: ResponsiveValue(
+                  context,
+                  defaultValue:  ScreenUtil().setHeight((size.height - kBottomNavigationBarHeight) * 0.6),
+                  valueWhen:  [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value:  ScreenUtil().setHeight((size.height - kBottomNavigationBarHeight) * 0.7),
+                    )
+                  ],
+                ).value ?? 0.0,
               child: SingleChildScrollView(
                 physics: const PageScrollPhysics(),
                 scrollDirection: Axis.vertical,
-                child: Text(
-                  Strings.texto,
-                  textAlign: TextAlign.justify,
-                  style: TextStyle(
-                    fontFamily: FontFamily.helvetica,
-                    fontSize: ScreenUtil().setSp(18),
-                    height: 1.5,
-                    color: AppColors.grisBase,
+                child: Wrap(
+                  direction: Axis.horizontal,
+                  spacing: -1.0,
+                  children:[
+                    Text(
+                    Strings.texto1,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontFamily: FontFamily.helvetica,
+                      fontSize: ResponsiveValue(
+                    context,
+                    defaultValue: ScreenUtil().setSp(18),
+                    valueWhen: const [
+                      
+                      Condition.equals(
+                        name: TABLET,
+                        value: 24.0,
+                      )
+                    ],
+                  ).value ?? 0.0,
+                      height: 1.5,
+                      color: AppColors.grisBase,
+                    ),
                   ),
+                  Text(
+                    Strings.texto2,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontFamily: FontFamily.helvetica,
+                      fontWeight: FontWeight.bold,
+                      fontSize: ResponsiveValue(
+                    context,
+                    defaultValue: ScreenUtil().setSp(18),
+                    valueWhen: const [
+                      
+                      Condition.equals(
+                        name: TABLET,
+                        value: 24.0,
+                      )
+                    ],
+                  ).value ?? 0.0,
+                      height: 1.5,
+                      color: AppColors.grisBase,
+                    ),
+                  ),
+                  Text(
+                    Strings.texto3,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontFamily: FontFamily.helvetica,
+                      fontSize: ResponsiveValue(
+                    context,
+                    defaultValue: ScreenUtil().setSp(18),
+                    valueWhen: const [
+                      
+                      Condition.equals(
+                        name: TABLET,
+                        value: 24.0,
+                      )
+                    ],
+                  ).value ?? 0.0,
+                      height: 1.5,
+                      color: AppColors.grisBase,
+                    ),
+                  ),
+                  ]
                 ),
               ),
             ),
-            const SizedBox(
-              height: 30,
-            ),
-            CustomPaint(
-                painter: LineaHorizontalGruesa(
-                    1.45, const Offset((-800), 0.0), const Offset(800, 0.0))),
+            
           ],
         ),
       ),

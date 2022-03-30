@@ -5,6 +5,7 @@ import 'package:amalia_musica/widgets/line_horizontal_gruesa.dart';
 import 'package:amalia_musica/widgets/tarjeta.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class CreditosScreen extends StatelessWidget {
   const CreditosScreen({Key? key}) : super(key: key);
@@ -54,7 +55,17 @@ class CreditosScreen extends StatelessWidget {
             height: 15.0,
           ),
           SizedBox(
-            height: ScreenUtil().setHeight(size.height * 0.7),
+            height: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setHeight((size.height - kBottomNavigationBarHeight) * 0.7),
+                  valueWhen:  [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: ScreenUtil().setHeight((size.height - kBottomNavigationBarHeight) * 0.8),
+                    )
+                  ],
+                ).value ?? 0.0,
             child: Center(
               child: SingleChildScrollView(
                 physics: const PageScrollPhysics(),
@@ -64,8 +75,28 @@ class CreditosScreen extends StatelessWidget {
                     Tarjeta(
                       titulo: 'Dirección de proyecto',
                       description: 'Yanet Cabargas Fernnández',
-                      tituloTamanno: 20,
-                      descriptionTamano: 14,
+                      tituloTamanno: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(20),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 28.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+                      descriptionTamano: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(14),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 20.0,
+                    )
+                  ],
+                ).value ?? 0.0,
                       alineacion: '',
                     ),
                     const SizedBox(
@@ -74,8 +105,28 @@ class CreditosScreen extends StatelessWidget {
                     Tarjeta(
                       titulo: 'Proveedor de contenidos',
                       description: 'Jorge Félix Leyva García',
-                      tituloTamanno: 20,
-                      descriptionTamano: 14,
+                       tituloTamanno: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(20),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 28.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+                      descriptionTamano: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(14),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 20.0,
+                    )
+                  ],
+                ).value ?? 0.0,
                       alineacion: '',
                     ),
                     const SizedBox(
@@ -84,8 +135,28 @@ class CreditosScreen extends StatelessWidget {
                     Tarjeta(
                       titulo: 'Diseño',
                       description: 'Jeniffer Lucia Muñiz Márquez',
-                      tituloTamanno: 20,
-                      descriptionTamano: 14,
+                       tituloTamanno: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(20),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 28.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+                      descriptionTamano: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(14),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 20.0,
+                    )
+                  ],
+                ).value ?? 0.0,
                       alineacion: '',
                     ),
                     const SizedBox(
@@ -94,8 +165,28 @@ class CreditosScreen extends StatelessWidget {
                     Tarjeta(
                       titulo: 'Programación',
                       description: 'Yelena Islen San Juan',
-                      tituloTamanno: 20,
-                      descriptionTamano: 14,
+                       tituloTamanno: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(20),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 28.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+                      descriptionTamano: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(14),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 20.0,
+                    )
+                  ],
+                ).value ?? 0.0,
                       alineacion: '',
                     ),
                     const SizedBox(
@@ -104,8 +195,28 @@ class CreditosScreen extends StatelessWidget {
                     Tarjeta(
                       titulo: 'Control de calidad',
                       description: 'Maylen Gesen Gallinal',
-                      tituloTamanno: 20,
-                      descriptionTamano: 14,
+                       tituloTamanno: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(20),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 28.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+                      descriptionTamano: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(14),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 20.0,
+                    )
+                  ],
+                ).value ?? 0.0,
                       alineacion: '',
                     ),
                     const SizedBox(
@@ -114,8 +225,28 @@ class CreditosScreen extends StatelessWidget {
                     Tarjeta(
                       titulo: 'Gestión de la calidad y auditoría',
                       description: 'Mercedes María Sosa Hernández',
-                      tituloTamanno: 20,
-                      descriptionTamano: 14,
+                       tituloTamanno: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(20),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 28.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+                      descriptionTamano: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(14),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 20.0,
+                    )
+                  ],
+                ).value ?? 0.0,
                       alineacion: '',
                     ),
                     const SizedBox(
@@ -135,10 +266,31 @@ class CreditosScreen extends StatelessWidget {
                     Tarjeta(
                       titulo: 'ISBN',
                       description: '978-959-315-257-0',
-                      tituloTamanno: 20,
-                      descriptionTamano: 14,
+                      tituloTamanno: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(20),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 28.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+                      descriptionTamano: ResponsiveValue(
+                  context,
+                  defaultValue: ScreenUtil().setSp(14),
+                  valueWhen: const [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 20.0,
+                    )
+                  ],
+                ).value ?? 0.0,
                       alineacion: '',
                     ),
+                     
                   ],
                 ),
               ),

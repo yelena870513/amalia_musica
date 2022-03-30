@@ -119,7 +119,7 @@ class _PartichelaScreenState extends State<PartichelaScreen> {
                 painter: LineaHorizontalGruesa(
                     3, const Offset(-20.0, 0.0), const Offset(20.0, 0.0))),
             const SizedBox(
-              height: 60,
+              height: 20,
             ),
             Container(
               height: ScreenUtil().setHeight(90),
@@ -166,7 +166,7 @@ class _PartichelaScreenState extends State<PartichelaScreen> {
               height: 20,
             ),
             Container(
-              padding: const EdgeInsets.only(left: 23.0),
+              padding: const EdgeInsets.only(left: 0.0),
               width: ScreenUtil().setWidth(size.width * 0.90),
               color: AppColors.rosaBase,
               child: SizedBox(
@@ -175,22 +175,7 @@ class _PartichelaScreenState extends State<PartichelaScreen> {
                     contenidos: contenidosSeleccionados,
                   )),
             ),
-            SizedBox(
-            height: ResponsiveValue(
-                  context,
-                  defaultValue: 100.0,
-                  valueWhen: const [
-                    
-                    Condition.equals(
-                      name: TABLET,
-                      value: 380.0,
-                    )
-                  ],
-                ).value ?? 0.0,
-          ),
-          CustomPaint(
-              painter: LineaHorizontalGruesa(
-                  1.45, const Offset((-800), 0.0), const Offset(800, 0.0))),
+           
           ],
         ),
       ),

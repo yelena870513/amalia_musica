@@ -9,8 +9,8 @@ import 'line_horizontal.dart';
 class TarjetaFavorito extends StatelessWidget {
   final String titulo;
   final String description;
-  final int tituloTamanno;
-  final int descriptionTamano;
+  final double tituloTamanno;
+  final double descriptionTamano;
   final String alineacion;
   const TarjetaFavorito({
     Key? key,
@@ -31,11 +31,8 @@ class TarjetaFavorito extends StatelessWidget {
                  
           child: Align(
             alignment: getAlign(alineacion),
-            child: AutoSizeText(
-              titulo,
-              maxLines: 4,
-              minFontSize: ScreenUtil().setSp(12),
-              stepGranularity: ScreenUtil().setSp(1),
+            child: Text(
+              titulo,              
               style: TextStyle(
                 fontFamily: FontFamily.bodoniFLF,
                 fontWeight: FontWeight.bold,
@@ -50,14 +47,17 @@ class TarjetaFavorito extends StatelessWidget {
         Container(
           width: ScreenUtil().setWidth(100),
              
-          child: AutoSizeText(description.toUpperCase(),
-              maxLines: 3,
-              minFontSize: ScreenUtil().setSp(12),
-              stepGranularity: ScreenUtil().setSp(1),
-              textAlign: getTextAlign(alineacion),
-              style: TextStyle(
-                fontSize: ScreenUtil().setSp(descriptionTamano),
-              )),
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: AutoSizeText(description.toUpperCase(),
+                maxLines: 2,
+                minFontSize: ScreenUtil().setSp(8),
+                stepGranularity: ScreenUtil().setSp(1),
+                textAlign: getTextAlign(alineacion),
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(descriptionTamano),
+                )),
+          ),
         )
       ],
     );

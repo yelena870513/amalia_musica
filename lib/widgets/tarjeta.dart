@@ -4,8 +4,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-
-import 'line_horizontal.dart';
 import 'line_horizontal_gruesa.dart';
 
 class Tarjeta extends StatelessWidget {
@@ -28,14 +26,14 @@ class Tarjeta extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(7.0),
+          padding: const EdgeInsets.all(3.0),
           child: Align(
             alignment: getAlign(alineacion),
             child: AutoSizeText(
               titulo,
-              maxLines: 2,
-                      minFontSize: ScreenUtil().setSp(12),
-                      stepGranularity: ScreenUtil().setSp(1),
+              maxLines: 4,
+              minFontSize: ScreenUtil().setSp(9),
+              stepGranularity: ScreenUtil().setSp(0.1),
               style: TextStyle(
                 fontFamily: FontFamily.bodoniFLF,
                 fontWeight: FontWeight.bold,
@@ -47,36 +45,45 @@ class Tarjeta extends StatelessWidget {
           ),
         ),
         CustomPaint(
-                    painter: LineaHorizontalGruesa(1,
-                         Offset(ResponsiveValue(
-                  context,
-                  defaultValue: 50.0,
-                  valueWhen: const [
-                    
-                    Condition.equals(
-                      name: TABLET,
-                      value: 100.0,
-                    )
-                  ],
-                ).value ?? 0.0, 0.0), Offset(ResponsiveValue(
-                  context,
-                  defaultValue: -50.0,
-                  valueWhen: const [
-                    
-                    Condition.equals(
-                      name: TABLET,
-                      value: -100.0,
-                    )
-                  ],
-                ).value ?? 0.0, 0.0))),
-             
+            painter: LineaHorizontalGruesa(
+                1,
+                Offset(
+                    ResponsiveValue(
+                          context,
+                          defaultValue: 50.0,
+                          valueWhen: const [
+                            Condition.equals(
+                              name: TABLET,
+                              value: 100.0,
+                            )
+                          ],
+                        ).value ??
+                        0.0,
+                    0.0),
+                Offset(
+                    ResponsiveValue(
+                          context,
+                          defaultValue: -50.0,
+                          valueWhen: const [
+                            Condition.equals(
+                              name: TABLET,
+                              value: -100.0,
+                            )
+                          ],
+                        ).value ??
+                        0.0,
+                    0.0))),
         Padding(
-          padding: const EdgeInsets.all(7.0),
-          child: Text(description.toUpperCase(),
+          padding: const EdgeInsets.all(3.0),
+          child: AutoSizeText(description.toUpperCase(),
+              maxLines: 4,
+              overflow: TextOverflow.ellipsis,
+              minFontSize: ScreenUtil().setSp(8),
+              stepGranularity: ScreenUtil().setSp(0.5),
               textAlign: getTextAlign(alineacion),
               style: TextStyle(
                 fontSize: ScreenUtil().setSp(descriptionTamano),
-              )),
+              ),),
         )
       ],
     );

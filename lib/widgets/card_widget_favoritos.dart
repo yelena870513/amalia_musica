@@ -4,6 +4,7 @@ import 'package:amalia_musica/widgets/tarjeta_favorito.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class CardWidgetFavoritos extends StatelessWidget {
   const CardWidgetFavoritos(
@@ -22,7 +23,7 @@ class CardWidgetFavoritos extends StatelessWidget {
     return Consumer<FavoritoModel>(
       builder: (context, model, child) {
         return Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(3.0),
           child: Container(
             color: AppColors.rosaBase,
             width: ScreenUtil().setWidth(size.width * 0.37),
@@ -47,8 +48,28 @@ class CardWidgetFavoritos extends StatelessWidget {
                   child: TarjetaFavorito(
                     titulo: numero,
                     description: description,
-                    tituloTamanno: 60,
-                    descriptionTamano: 12,
+                    tituloTamanno: ResponsiveValue(
+                  context,
+                  defaultValue: 50.0,
+                  valueWhen: [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 80.0,
+                    )
+                  ],
+                ).value ?? 0.0,
+                    descriptionTamano:ResponsiveValue(
+                  context,
+                  defaultValue: 12.0,
+                  valueWhen: [
+                    
+                    Condition.equals(
+                      name: TABLET,
+                      value: 40.0,
+                    )
+                  ],
+                ).value ?? 0.0,
                     alineacion: 'right',
                   ),
                 ),

@@ -78,7 +78,7 @@ class _PartesScreenState extends State<PartesScreen> {
                   fontWeight: FontWeight.bold,
                   fontSize: ResponsiveValue(
                   context,
-                  defaultValue: ScreenUtil().setSp(35),
+                  defaultValue: ScreenUtil().setSp(30),
                   valueWhen: const [
                     
                     Condition.equals(
@@ -98,7 +98,7 @@ class _PartesScreenState extends State<PartesScreen> {
                   fontWeight: FontWeight.bold,
                   fontSize: ResponsiveValue(
                   context,
-                  defaultValue: ScreenUtil().setSp(25),
+                  defaultValue: ScreenUtil().setSp(20),
                   valueWhen: const [
                     
                     Condition.equals(
@@ -115,7 +115,7 @@ class _PartesScreenState extends State<PartesScreen> {
            SizedBox(
             height: ResponsiveValue(
                   context,
-                  defaultValue: 20.0,
+                  defaultValue: 10.0,
                   valueWhen: const [
                     
                     Condition.equals(
@@ -128,7 +128,7 @@ class _PartesScreenState extends State<PartesScreen> {
           CustomPaint(
               painter: LineaHorizontalGruesa(
                   3, const Offset(-20.0, 0.0), const Offset(20.0, 0.0))),
-          SizedBox(height: 10.0),
+          SizedBox(height: 5.0),
           for (var i = 0; i < temas.length - 1; i += 2)
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -169,22 +169,7 @@ class _PartesScreenState extends State<PartesScreen> {
                     painter: LineaHorizontalGruesa(3,
                         const Offset(20.0, 0.0), const Offset(-20.0, 0.0))),
              
-           SizedBox(
-            height: ResponsiveValue(
-                  context,
-                  defaultValue: 20.0,
-                  valueWhen: const [
-                    
-                    Condition.equals(
-                      name: TABLET,
-                      value: 40.0,
-                    )
-                  ],
-                ).value ?? 0.0,
-          ),
-          CustomPaint(
-              painter: LineaHorizontalGruesa(
-                  1.45, const Offset((-800), 0.0), const Offset(800, 0.0))),
+          
         ],
       ),
     );

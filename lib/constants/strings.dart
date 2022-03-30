@@ -6,11 +6,14 @@ class Strings {
   static const String creditos = "Créditos";
   static const String favoritos = "Favoritos";
   static const String intro = "Introducción";
-  static const String titulo = "“Amalia Simoni”";
-  static const String suite = "Suite sinfónica";
+  static const String titulo = "Suite Sinfónica";
+  static const String suite = "“Amalia Simoni”";
   static const String resultFavorito = "No hay favoritos.";
-  static const String texto = '''Esta partitura, que lleva por título Suite sinfónica “Amalia Simoni”, está inspirada en la vida de la gran Amalia Simoni, esposa de Ignacio Agramonte; maravillosa mujer que, además de ser una patriota comprometida y esposa leal a la causa revolucionaria y a su amor por El Mayor, fue una reconocida cantante de ópera de su
-tiempo.
+  static const String texto1 = '''Esta partitura, que lleva por título 
+''';
+static const String texto2 = '''Suite sinfónica “Amalia Simoni”
+''';
+static const String texto3 = ''', está inspirada en la vida de la gran Amalia Simoni, esposa de Ignacio Agramonte; maravillosa mujer que, además de ser una patriota comprometida y esposa leal a la causa revolucionaria y a su amor por El Mayor, fue una reconocida cantante de ópera de su tiempo.
 
 La suite consta de cuatro movimientos de duración relativamente cortos, con un total de 194 páginas. El contenido está distribuido de la siguiente manera: una partitura general para el director y las partes individuales de cada uno de los instrumentos. 
 

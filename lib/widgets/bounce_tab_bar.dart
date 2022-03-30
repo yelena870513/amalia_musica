@@ -84,46 +84,54 @@ class _BounceTabBarState extends State<BounceTabBar>
             currentElevation = -_movement * _animElevationIn.value +
                 (_movement - kBottomNavigationBarHeight / 4) *
                     _animElevationOut.value;
-            return Center(
-              child: Container(
-                width: currentWidth,
-                decoration: BoxDecoration(
-                    color: widget.backgroundColor,
-                    borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(5),
-                        topLeft: Radius.circular(5))),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: List.generate(widget.items.length, (index) {
-                      final child = widget.items[index];
-                      final Widget innerWidget = CircleAvatar(
-                        backgroundColor: widget.backgroundColor,
-                        child: child,
-                        radius: 30.0,
-                      );
+            return Container(
+              padding: EdgeInsets.only(top: 20.0),
+              decoration: const BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: Colors.black, width: 1.0,)
+                )
+              ),
+              child: Center(
+                child: Container(                
+                  width: currentWidth,
+                  decoration: BoxDecoration(
+                      color: widget.backgroundColor,
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(5),
+                          topLeft: Radius.circular(5))),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: List.generate(widget.items.length, (index) {
+                        final child = widget.items[index];
+                        final Widget innerWidget = CircleAvatar(
+                          backgroundColor: widget.backgroundColor,
+                          child: child,
+                          radius: 30.0,
+                        );
 
-                      if (_currentIndex == index) {
-                        return CustomPaint(
-                          child: Transform.translate(
-                            offset: Offset(0.0, currentElevation),
+                        if (_currentIndex == index) {
+                          return CustomPaint(
+                            child: Transform.translate(
+                              offset: Offset(0.0, currentElevation),
+                              child: innerWidget,
+                            ),
+                            foregroundPainter:
+                                _CircleItemPainter(_animCircleItem.value),
+                          );
+                        } else {
+                          return GestureDetector(
                             child: innerWidget,
-                          ),
-                          foregroundPainter:
-                              _CircleItemPainter(_animCircleItem.value),
-                        );
-                      } else {
-                        return GestureDetector(
-                          child: innerWidget,
-                          onTap: () {
-                            setState(() {
-                              widget.onTabChanged(index);
-                              _currentIndex = index;
-                            });
-                            _controller.forward(from: 0.0);
-                          },
-                        );
-                      }
-                    })),
+                            onTap: () {
+                              setState(() {
+                                widget.onTabChanged(index);
+                                _currentIndex = index;
+                              });
+                              _controller.forward(from: 0.0);
+                            },
+                          );
+                        }
+                      })),
+                ),
               ),
             );
           },
