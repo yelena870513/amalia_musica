@@ -1,6 +1,6 @@
 # amalia_musica
 
-A new Flutter project.
+Suite sinfónica “Amalia Simoni”
 
 ## Getting Started
 
